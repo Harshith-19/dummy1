@@ -1,17 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="border rounded p-4">
-      <img src={product.image} alt={product.title} className="w-full mb-2" />
-      <h3 className="text-lg font-bold">{product.title}</h3>
-      <p className="text-sm text-gray-500 mb-2">{product.description}</p>
-      <p className="font-semibold mb-2">${product.price}</p>
-      <div className="flex items-center">
-        <span className="text-yellow-500">{product.rating} stars</span>
-        <span className="ml-auto">{product.category}</span>
+    <Link
+      to={`/product/${product.id}`}
+      className="block border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300"
+      style={{ textDecoration: 'none', color: 'inherit' }}
+    >
+      <div>
+        <img src={product.image} alt={product.title} className="w-full h-64 object-cover" />
+        <div className="p-4">
+          <h3 className="text-lg font-bold mb-2">{product.title}</h3>
+          <p className="text-gray-500 mb-2">${product.price}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

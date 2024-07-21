@@ -1,5 +1,3 @@
-// cartSlice.js
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -27,8 +25,19 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.items = {};
     },
+    reduceQuantity(state, action) {
+      const productId = action.payload.productId;
+
+      if (state.items[productId]) {
+        if (state.items[productId].quantity > 1) {
+          state.items[productId].quantity--;
+        } else {
+          delete state.items[productId];
+        }
+      }
+    },
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, reduceQuantity } = cartSlice.actions;
 export default cartSlice.reducer;
